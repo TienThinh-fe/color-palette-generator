@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import CopyGuide from "./components/CopyGuide";
+import GridPalette from "./components/GridPalette";
+import ButtonGenerate from "./components/ButtonGenerate"
+import Title from "./components/Title";
+import getColors from "./utils";
 
 function App() {
+  const [palette, setPalette] = useState([
+    [255, 255, 255],
+    [255, 255, 255],
+    [255, 255, 255],
+    [255, 255, 255],
+    [255, 255, 255],
+  ]);
+
+  const handleSetPalette = () => {
+    setPalette(getColors());
+    console.log('Palette: ', palette)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Title />
+      <GridPalette palette={palette} />
+      <ButtonGenerate handleOnClick={handleSetPalette} />
+      <CopyGuide />
     </div>
   );
 }
